@@ -149,10 +149,12 @@ class NXSession(object):
 
     def setup_routes(self, gateway):
         ip = pyroute2.IPRoute()
-
+        # similar to log message from binary client
+        logging.info("You have access to the following networks:")
         for route in set(self.routes):
             net = ipaddress.IPv4Network(unicode(route))
             dst = '%s/%d' % (net.network_address, net.prefixlen)
             ip.route("add", dst=dst, gateway=gateway)
+            logging.info(f'\t{dst}')
 
         logging.info("Remote routing configured, VPN is up")
