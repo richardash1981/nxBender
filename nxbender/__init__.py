@@ -35,7 +35,7 @@ def main():
         loglevel = logging.INFO
 
     if not args.password:
-        args.password = getpass.getpass()
+        args.password = getpass.getpass(prompt=f'VPN Password for {args.username}:')
 
 
     formatter = ColoredFormatter(
